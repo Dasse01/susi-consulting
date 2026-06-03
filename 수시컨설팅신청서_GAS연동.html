@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수시 컨설팅 신청서 - 김휘창입시컨설팅</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
+            font-size: 9pt;
+            color: #404040;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .button-area {
+            max-width: 900px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .button-group-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .button-group-right {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .save-btn {
+            padding: 12px 25px;
+            font-size: 12pt;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .save-btn.example {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .save-btn.example:hover {
+            background: #d68910;
+        }
+        
+        .save-btn.clear {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .save-btn.clear:hover {
+            background: #7f8c8d;
+        }
+        
+        .save-btn.submit {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .save-btn.submit:hover {
+            background: #c0392b;
+            transform: scale(1.02);
+        }
+        
+        .save-btn.pdf {
+            background: #3498db;
+            color: white;
+        }
+        
+        .save-btn.pdf:hover {
+            background: #2980b9;
+        }
+        
+        .save-btn.image {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .save-btn.image:hover {
+            background: #8e44ad;
+        }
+        
+        .save-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 20pt;
+            font-weight: bold;
+            color: #000;
+            padding: 20px 0 30px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        th, td {
+            border: 1px solid #999;
+            padding: 8px 10px;
+            vertical-align: middle;
+        }
+        
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        td {
+            background: white;
+        }
+        
+        td.input-cell {
+            min-width: 120px;
+        }
+        
+        .label-cell {
+            background: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+            width: 100px;
+        }
+        
+        input[type="text"], input[type="date"], input[type="time"], select {
+            width: 100%;
+            padding: 5px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-family: inherit;
+        }
+        
+        input[type="text"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus {
+            outline: none;
+            border-color: #4a90d9;
+            box-shadow: 0 0 3px rgba(74, 144, 217, 0.3);
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #4a90d9;
+        }
+        
+        .example-text {
+            font-size: 8pt;
+            color: #666;
+            padding: 5px 10px;
+            text-align: right;
+        }
+        
+        .rank-section {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .rank-input {
+            width: 40px !important;
+            text-align: center;
+        }
+        
+        .tendency-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 5px 0;
+        }
+        
+        .tendency-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .tendency-item input {
+            width: 40px !important;
+            text-align: center;
+        }
+        
+        .warning-text {
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        
+        .privacy-section {
+            margin-top: 20px;
+        }
+        
+        .privacy-title {
+            font-weight: bold;
+            font-size: 8pt;
+            color: #555;
+            padding: 8px 10px;
+            background: #f8f8f8;
+            border: 1px solid #999;
+            border-bottom: none;
+        }
+        
+        .privacy-content {
+            border: 1px solid #999;
+            padding: 15px;
+            min-height: 280px;
+            background: #fafafa;
+            font-size: 8pt;
+            line-height: 1.6;
+        }
+        
+        .history-section td {
+            height: 50px;
+        }
+        
+        .history-label {
+            background: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+            font-size: 10pt;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid #333;
+        }
+        
+        .footer-text {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* 예시 데이터 표시 스타일 */
+        .example-mode input[type="text"],
+        .example-mode input[type="date"],
+        .example-mode input[type="time"],
+        .example-mode select,
+        .example-mode textarea {
+            background-color: #fff9e6;
+            border-color: #f39c12;
+        }
+        
+        .example-notice {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto 15px auto;
+            background: #fff3cd;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 10pt;
+            color: #856404;
+        }
+        
+        .example-notice.show {
+            display: block;
+        }
+        
+        .example-notice strong {
+            color: #e67e22;
+        }
+        
+        /* 모달 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .modal-icon {
+            font-size: 50pt;
+            margin-bottom: 15px;
+        }
+        
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 16pt;
+        }
+        
+        .modal-content p {
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .modal-btn {
+            padding: 12px 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+        
+        .modal-btn.success {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .modal-btn.error {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .button-area, .example-notice {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .button-area {
+                flex-direction: column;
+            }
+            .button-group-left, .button-group-right {
+                justify-content: center;
+            }
+            .save-btn {
+                padding: 10px 15px;
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 네비게이션 -->
+    <div class="top-nav" style="max-width: 900px; margin: 0 auto 10px auto; text-align: left;">
+        <a href="수시컨설팅_안내.html" style="display: inline-flex; align-items: center; gap: 8px; color: #1a237e; text-decoration: none; font-size: 11pt; font-weight: 600; padding: 10px 0;">
+            ← 수시컨설팅 안내 페이지로 돌아가기
+        </a>
+    </div>
+    
+    <!-- 예시 데이터 안내 -->
+    <div class="example-notice" id="exampleNotice">
+        💡 <strong>예시 데이터가 입력되었습니다.</strong> 작성 방법을 참고한 후, "초기화" 버튼을 눌러 실제 내용을 입력해주세요.
+    </div>
+    
+    <div class="button-area">
+        <div class="button-group-left">
+            <button class="save-btn example" onclick="fillExample()" title="작성 예시 보기">📝 예시입력</button>
+            <button class="save-btn clear" onclick="clearForm()" title="모든 입력 초기화">🔄 초기화</button>
+        </div>
+        <div class="button-group-right">
+            <button class="save-btn submit" onclick="submitForm()" id="submitBtn">📧 신청서 제출</button>
+            <button class="save-btn pdf" onclick="savePDF()">📄 PDF 저장</button>
+            <button class="save-btn image" onclick="saveImage()">🖼️ 이미지 저장</button>
+        </div>
+    </div>
+    
+    <div class="container" id="form-container">
+        <h1 class="title">수시 컨설팅 신청서</h1>
+        
+        <!-- 기본 정보 섹션 -->
+        <table>
+            <tr>
+                <th class="label-cell">컨설팅명</th>
+                <td class="input-cell">수시컨설팅</td>
+                <th class="label-cell">컨설팅 날짜</th>
+                <td class="input-cell"><input type="date" id="consulting_date" name="consulting_date"></td>
+                <th class="label-cell">컨설팅 시간</th>
+                <td class="input-cell"><input type="time" id="consulting_time" name="consulting_time"></td>
+            </tr>
+            <tr>
+                <th class="label-cell">학생 이름 <span class="required">*</span></th>
+                <td class="input-cell"><input type="text" id="student_name" name="student_name" required></td>
+                <th class="label-cell">학년 <span class="required">*</span></th>
+                <td class="input-cell">
+                    <select id="grade" name="grade" required>
+                        <option value="">선택</option>
+                        <option value="고1">고1</option>
+                        <option value="고2">고2</option>
+                        <option value="고3">고3</option>
+                        <option value="N수생">N수생</option>
+                    </select>
+                </td>
+                <th class="label-cell">학생 성별</th>
+                <td class="input-cell">
+                    <select id="gender" name="gender">
+                        <option value="">선택</option>
+                        <option value="남">남</option>
+                        <option value="여">여</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="label-cell">연락처 <span class="required">*</span></th>
+                <td class="input-cell"><input type="tel" id="contact_phone" name="contact_phone" placeholder="010-0000-0000" required></td>
+                <th class="label-cell">이메일 <span class="required">*</span></th>
+                <td class="input-cell" colspan="3"><input type="email" id="contact_email" name="contact_email" placeholder="접수확인 메일을 받을 주소" required></td>
+            </tr>
+            <tr>
+                <th class="label-cell">고교명 <span class="required">*</span></th>
+                <td class="input-cell"><input type="text" id="school_name" name="school_name" required></td>
+                <th class="label-cell">고교소재지역</th>
+                <td class="input-cell"><input type="text" id="school_region" name="school_region"></td>
+                <th class="label-cell">계열</th>
+                <td class="input-cell">
+                    <select id="track" name="track">
+                        <option value="">선택</option>
+                        <option value="인문">인문</option>
+                        <option value="자연">자연</option>
+                        <option value="예체능">예체능</option>
+                        <option value="통합">통합</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- 희망대학/학과 섹션 -->
+        <table>
+            <tr>
+                <th class="label-cell">희망대학</th>
+                <td colspan="2"><input type="text" id="hope_university" name="hope_university"></td>
+                <th class="label-cell">희망학과</th>
+                <td colspan="2"><input type="text" id="hope_major" name="hope_major"></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="example-text">희망대학 기재 예시 : 서울대, 연세대, 고려대</td>
+                <td colspan="3" class="example-text">희망학과 기재 예시 : 경영학과, 경제학과, 광고홍보</td>
+            </tr>
+        </table>
+        
+        <!-- 지원희망전형 우선순위 -->
+        <table>
+            <tr>
+                <th class="label-cell" style="width: 120px;">지원희망전형<br>우선순위(수시)</th>
+                <td>
+                    <div class="rank-section">
+                        <span>[ <input type="text" class="rank-input" id="rank_gyogwa" name="rank_gyogwa" maxlength="1"> ]순위 : 교과 전형</span>
+                        <span style="margin-left: 20px;">[ <input type="text" class="rank-input" id="rank_jonghap" name="rank_jonghap" maxlength="1"> ]순위 : 학생부종합 전형</span>
+                        <span style="margin-left: 20px;">[ <input type="text" class="rank-input" id="rank_nonsul" name="rank_nonsul" maxlength="1"> ]순위 : 논술 전형</span>
+                        <span style="margin-left: 20px;">[ <input type="text" class="rank-input" id="rank_etc" name="rank_etc" maxlength="1"> ]순위 : 기타 전형</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="label-cell">수시 6회<br>지원성향</th>
+                <td>
+                    <div class="tendency-section">
+                        <div class="tendency-item">
+                            <span>안정적하향지원 :</span>
+                            <span>( <input type="text" id="tendency_safe" name="tendency_safe" maxlength="1"> ) 회</span>
+                        </div>
+                        <div class="tendency-item">
+                            <span>적정지원 :</span>
+                            <span>( <input type="text" id="tendency_proper" name="tendency_proper" maxlength="1"> ) 회</span>
+                        </div>
+                        <div class="tendency-item">
+                            <span>소신지원 :</span>
+                            <span>( <input type="text" id="tendency_confident" name="tendency_confident" maxlength="1"> ) 회</span>
+                        </div>
+                        <div class="tendency-item">
+                            <span>도전적상향지원 :</span>
+                            <span>( <input type="text" id="tendency_challenge" name="tendency_challenge" maxlength="1"> ) 회</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- 상담 희망사항 -->
+        <table>
+            <tr>
+                <th class="label-cell" rowspan="2">상담<br>희망사항</th>
+                <td>
+                    <span class="warning-text">※ 전문대, 농어촌, 실기, 기회균등, 특성화고, 해외 재외국민전형은 상담이 불가함을 안내 드립니다.</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 100px;">
+                    <textarea id="consultation_request" name="consultation_request" rows="4" placeholder="상담 희망사항을 작성해 주세요."></textarea>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- 과거 지원내역 (졸업생) -->
+        <table class="history-section">
+            <tr>
+                <th class="label-cell" rowspan="4" style="width: 100px;">과거지원내역<br>(졸업생)</th>
+                <th class="history-label" style="width: 50px;">수시</th>
+                <td colspan="4"><input type="text" id="past_susi_1" name="past_susi_1"></td>
+            </tr>
+            <tr>
+                <td class="history-label"></td>
+                <td colspan="4"><input type="text" id="past_susi_2" name="past_susi_2"></td>
+            </tr>
+            <tr>
+                <th class="history-label">정시</th>
+                <td colspan="4"><input type="text" id="past_jeongsi" name="past_jeongsi"></td>
+            </tr>
+            <tr>
+                <td colspan="5" class="example-text" style="text-align: right; font-size: 8pt; color: #777;">
+                    과거지원내역(수시) 예시 : 연세대/종합/경영/1차합 , 고려대/논술/경제/불합 [재학생은 작성하지 않음]
+                </td>
+            </tr>
+        </table>
+        
+        <!-- 개인정보 수집 및 활용 동의 -->
+        <div class="privacy-section">
+            <div class="privacy-title">개인정보 수집 및 활용 동의</div>
+            <div class="privacy-content">
+                <p><strong>1. 개인정보의 수집 및 이용 목적</strong></p>
+                <p style="margin-left: 15px; margin-bottom: 10px;">- 수시 컨설팅 서비스 제공 및 상담</p>
+                
+                <p><strong>2. 수집하는 개인정보 항목</strong></p>
+                <p style="margin-left: 15px; margin-bottom: 10px;">- 학생 이름, 학년, 성별, 고교명, 고교소재지역, 계열, 희망대학, 희망학과, 과거 지원내역</p>
+                
+                <p><strong>3. 개인정보의 보유 및 이용 기간</strong></p>
+                <p style="margin-left: 15px; margin-bottom: 10px;">- 컨설팅 서비스 제공 목적 달성 시까지 (상담 완료 후 1년 이내 파기)</p>
+                
+                <p><strong>4. 동의 거부 권리 및 불이익</strong></p>
+                <p style="margin-left: 15px; margin-bottom: 10px;">- 개인정보 수집 및 이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 컨설팅 서비스를 받으실 수 없습니다.</p>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <label style="font-size: 10pt; cursor: pointer;">
+                        <input type="checkbox" id="privacy_agree" name="privacy_agree" style="margin-right: 8px; width: 18px; height: 18px; vertical-align: middle;">
+                        <strong>위 개인정보 수집 및 활용에 동의합니다. <span class="required">*</span></strong>
+                    </label>
+                </div>
+                
+                <div style="margin-top: 30px; text-align: right;">
+                    <span>작성일 : </span>
+                    <input type="date" id="write_date" name="write_date" style="width: 150px;">
+                    <span style="margin-left: 30px;">서명 : </span>
+                    <input type="text" id="signature" name="signature" style="width: 150px;" placeholder="(서명)">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p class="footer-text">김휘창입시컨설팅 010-6674-6790</p>
+        </div>
+    </div>
+    
+    <!-- 결과 모달 -->
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">✅</div>
+            <h3 id="modalTitle">전송 완료</h3>
+            <p id="modalMessage"></p>
+            <button class="modal-btn success" id="modalBtn" onclick="closeModal()">확인</button>
+        </div>
+    </div>
+
+    <script>
+        // ▼▼▼ Google Apps Script 웹앱 URL (배포 후 여기에 붙여넣기) ▼▼▼
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbyENx4ybwkKXFDLBSs_sWsjFqDywQgMOe01h1jDxn8kOGpmMxErZmE9K1khx0oc12hV/exec';
+        // ▲▲▲ 아래 안내에 따라 배포한 URL로 교체하세요 ▲▲▲
+        
+        // 예시 데이터
+        const EXAMPLE_DATA = {
+            consulting_date: getNextWeekday(),
+            consulting_time: '14:00',
+            student_name: '김민준',
+            grade: '고3',
+            gender: '남',
+            contact_phone: '010-1234-5678',
+            contact_email: 'example@gmail.com',
+            school_name: '일산고등학교',
+            school_region: '경기 고양시',
+            track: '자연',
+            hope_university: '서울대, 연세대, 고려대, 성균관대',
+            hope_major: '컴퓨터공학과, 소프트웨어학과, 인공지능학과',
+            rank_gyogwa: '3',
+            rank_jonghap: '1',
+            rank_nonsul: '2',
+            rank_etc: '4',
+            tendency_safe: '1',
+            tendency_proper: '2',
+            tendency_confident: '2',
+            tendency_challenge: '1',
+            consultation_request: '학생부종합전형 위주로 상담 희망합니다.\n\n1. 내신 2등급 초반인데 서울대 지균 가능성이 있을지 궁금합니다.\n2. 비교과 활동으로 코딩 동아리와 수학 멘토링을 했는데 어필 방법이 궁금합니다.\n3. 자기소개서 작성 팁도 알려주시면 감사하겠습니다.',
+            past_susi_1: '',
+            past_susi_2: '',
+            past_jeongsi: '',
+            signature: '김민준'
+        };
+        
+        // 다음 주 평일 날짜 계산
+        function getNextWeekday() {
+            const today = new Date();
+            const nextWeek = new Date(today);
+            nextWeek.setDate(today.getDate() + 7);
+            
+            // 주말이면 월요일로
+            const day = nextWeek.getDay();
+            if (day === 0) nextWeek.setDate(nextWeek.getDate() + 1);
+            if (day === 6) nextWeek.setDate(nextWeek.getDate() + 2);
+            
+            return nextWeek.toISOString().split('T')[0];
+        }
+        
+        // 예시 데이터 입력
+        function fillExample() {
+            // 입력 필드 채우기
+            document.getElementById('consulting_date').value = EXAMPLE_DATA.consulting_date;
+            document.getElementById('consulting_time').value = EXAMPLE_DATA.consulting_time;
+            document.getElementById('student_name').value = EXAMPLE_DATA.student_name;
+            document.getElementById('grade').value = EXAMPLE_DATA.grade;
+            document.getElementById('gender').value = EXAMPLE_DATA.gender;
+            document.getElementById('contact_phone').value = EXAMPLE_DATA.contact_phone;
+            document.getElementById('contact_email').value = EXAMPLE_DATA.contact_email;
+            document.getElementById('school_name').value = EXAMPLE_DATA.school_name;
+            document.getElementById('school_region').value = EXAMPLE_DATA.school_region;
+            document.getElementById('track').value = EXAMPLE_DATA.track;
+            document.getElementById('hope_university').value = EXAMPLE_DATA.hope_university;
+            document.getElementById('hope_major').value = EXAMPLE_DATA.hope_major;
+            document.getElementById('rank_gyogwa').value = EXAMPLE_DATA.rank_gyogwa;
+            document.getElementById('rank_jonghap').value = EXAMPLE_DATA.rank_jonghap;
+            document.getElementById('rank_nonsul').value = EXAMPLE_DATA.rank_nonsul;
+            document.getElementById('rank_etc').value = EXAMPLE_DATA.rank_etc;
+            document.getElementById('tendency_safe').value = EXAMPLE_DATA.tendency_safe;
+            document.getElementById('tendency_proper').value = EXAMPLE_DATA.tendency_proper;
+            document.getElementById('tendency_confident').value = EXAMPLE_DATA.tendency_confident;
+            document.getElementById('tendency_challenge').value = EXAMPLE_DATA.tendency_challenge;
+            document.getElementById('consultation_request').value = EXAMPLE_DATA.consultation_request;
+            document.getElementById('past_susi_1').value = EXAMPLE_DATA.past_susi_1;
+            document.getElementById('past_susi_2').value = EXAMPLE_DATA.past_susi_2;
+            document.getElementById('past_jeongsi').value = EXAMPLE_DATA.past_jeongsi;
+            document.getElementById('signature').value = EXAMPLE_DATA.signature;
+            document.getElementById('write_date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('privacy_agree').checked = true;
+            
+            // 예시 모드 스타일 적용
+            document.getElementById('form-container').classList.add('example-mode');
+            document.getElementById('exampleNotice').classList.add('show');
+            
+            // 스크롤 맨 위로
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 폼 초기화
+        function clearForm() {
+            // 모든 입력 필드 초기화
+            document.getElementById('consulting_date').value = '';
+            document.getElementById('consulting_time').value = '';
+            document.getElementById('student_name').value = '';
+            document.getElementById('grade').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('contact_phone').value = '';
+            document.getElementById('contact_email').value = '';
+            document.getElementById('school_name').value = '';
+            document.getElementById('school_region').value = '';
+            document.getElementById('track').value = '';
+            document.getElementById('hope_university').value = '';
+            document.getElementById('hope_major').value = '';
+            document.getElementById('rank_gyogwa').value = '';
+            document.getElementById('rank_jonghap').value = '';
+            document.getElementById('rank_nonsul').value = '';
+            document.getElementById('rank_etc').value = '';
+            document.getElementById('tendency_safe').value = '';
+            document.getElementById('tendency_proper').value = '';
+            document.getElementById('tendency_confident').value = '';
+            document.getElementById('tendency_challenge').value = '';
+            document.getElementById('consultation_request').value = '';
+            document.getElementById('past_susi_1').value = '';
+            document.getElementById('past_susi_2').value = '';
+            document.getElementById('past_jeongsi').value = '';
+            document.getElementById('signature').value = '';
+            document.getElementById('write_date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('privacy_agree').checked = false;
+            
+            // 예시 모드 스타일 제거
+            document.getElementById('form-container').classList.remove('example-mode');
+            document.getElementById('exampleNotice').classList.remove('show');
+            
+            // 첫 번째 입력 필드에 포커스
+            document.getElementById('student_name').focus();
+        }
+        
+        // 폼 데이터 수집
+        function collectFormData() {
+            return {
+                consulting_date: document.getElementById('consulting_date').value,
+                consulting_time: document.getElementById('consulting_time').value,
+                student_name: document.getElementById('student_name').value,
+                grade: document.getElementById('grade').value,
+                gender: document.getElementById('gender').value,
+                contact_phone: document.getElementById('contact_phone').value,
+                contact_email: document.getElementById('contact_email').value,
+                school_name: document.getElementById('school_name').value,
+                school_region: document.getElementById('school_region').value,
+                track: document.getElementById('track').value,
+                hope_university: document.getElementById('hope_university').value,
+                hope_major: document.getElementById('hope_major').value,
+                rank_gyogwa: document.getElementById('rank_gyogwa').value,
+                rank_jonghap: document.getElementById('rank_jonghap').value,
+                rank_nonsul: document.getElementById('rank_nonsul').value,
+                rank_etc: document.getElementById('rank_etc').value,
+                tendency_safe: document.getElementById('tendency_safe').value,
+                tendency_proper: document.getElementById('tendency_proper').value,
+                tendency_confident: document.getElementById('tendency_confident').value,
+                tendency_challenge: document.getElementById('tendency_challenge').value,
+                consultation_request: document.getElementById('consultation_request').value,
+                past_susi_1: document.getElementById('past_susi_1').value,
+                past_susi_2: document.getElementById('past_susi_2').value,
+                past_jeongsi: document.getElementById('past_jeongsi').value,
+                write_date: document.getElementById('write_date').value,
+                signature: document.getElementById('signature').value
+            };
+        }
+        
+        // 폼 데이터 텍스트 변환
+        function formatFormDataAsText(data) {
+            return `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   수시 컨설팅 신청서
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+【기본 정보】
+• 컨설팅 날짜: ${data.consulting_date || '미정'}
+• 컨설팅 시간: ${data.consulting_time || '미정'}
+• 학생 이름: ${data.student_name}
+• 학년: ${data.grade}
+• 성별: ${data.gender || '-'}
+• 연락처: ${data.contact_phone || '-'}
+• 이메일: ${data.contact_email || '-'}
+• 고교명: ${data.school_name}
+• 고교소재지역: ${data.school_region || '-'}
+• 계열: ${data.track || '-'}
+
+【희망 대학/학과】
+• 희망대학: ${data.hope_university || '-'}
+• 희망학과: ${data.hope_major || '-'}
+
+【지원희망전형 우선순위】
+• 교과 전형: ${data.rank_gyogwa || '-'}순위
+• 학생부종합 전형: ${data.rank_jonghap || '-'}순위
+• 논술 전형: ${data.rank_nonsul || '-'}순위
+• 기타 전형: ${data.rank_etc || '-'}순위
+
+【수시 6회 지원성향】
+• 안정적하향지원: ${data.tendency_safe || '0'}회
+• 적정지원: ${data.tendency_proper || '0'}회
+• 소신지원: ${data.tendency_confident || '0'}회
+• 도전적상향지원: ${data.tendency_challenge || '0'}회
+
+【상담 희망사항】
+${data.consultation_request || '없음'}
+
+【과거 지원내역 (졸업생)】
+• 수시: ${data.past_susi_1 || '-'}
+        ${data.past_susi_2 || ''}
+• 정시: ${data.past_jeongsi || '-'}
+
+【작성 정보】
+• 작성일: ${data.write_date}
+• 서명: ${data.signature || '-'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+김휘창입시컨설팅 010-6674-6790
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            `;
+        }
+        
+        // 유효성 검사
+        function validateForm() {
+            const studentName = document.getElementById('student_name').value.trim();
+            const grade = document.getElementById('grade').value;
+            const schoolName = document.getElementById('school_name').value.trim();
+            const contactPhone = document.getElementById('contact_phone').value.trim();
+            const contactEmail = document.getElementById('contact_email').value.trim();
+            const privacyAgree = document.getElementById('privacy_agree').checked;
+            
+            if (!studentName) {
+                showModal('error', '입력 오류', '학생 이름을 입력해주세요.');
+                document.getElementById('student_name').focus();
+                return false;
+            }
+            if (!grade) {
+                showModal('error', '입력 오류', '학년을 선택해주세요.');
+                document.getElementById('grade').focus();
+                return false;
+            }
+            if (!contactPhone) {
+                showModal('error', '입력 오류', '연락처를 입력해주세요.');
+                document.getElementById('contact_phone').focus();
+                return false;
+            }
+            if (!contactEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)) {
+                showModal('error', '입력 오류', '올바른 이메일 주소를 입력해주세요.\n(접수 확인 메일을 받을 주소입니다)');
+                document.getElementById('contact_email').focus();
+                return false;
+            }
+            if (!schoolName) {
+                showModal('error', '입력 오류', '고교명을 입력해주세요.');
+                document.getElementById('school_name').focus();
+                return false;
+            }
+            if (!privacyAgree) {
+                showModal('error', '동의 필요', '개인정보 수집 및 활용에 동의해주세요.');
+                return false;
+            }
+            return true;
+        }
+        
+        // 신청서 제출
+        async function submitForm() {
+            if (!validateForm()) return;
+            
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span>전송 중...';
+            
+            try {
+                const formData = collectFormData();
+                const formText = formatFormDataAsText(formData);
+                formData.form_text = formText;
+                formData.submit_date = new Date().toLocaleString('ko-KR');
+
+                // Apps Script로 전송 (no-cors: 시트 기록 + 메일 발송은 서버에서 처리)
+                await fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(formData)
+                });
+
+                // no-cors는 응답을 읽을 수 없으므로, 전송 성공으로 간주
+                showModal('success', '신청서 제출 완료!',
+                    `${formData.student_name} 학생의 수시컨설팅 신청서가\n성공적으로 접수되었습니다.\n\n입력하신 이메일(${formData.contact_email})로\n접수 확인 메일을 보내드렸습니다.\n\n빠른 시일 내에 연락드리겠습니다.`);
+
+                document.getElementById('form-container').classList.remove('example-mode');
+                document.getElementById('exampleNotice').classList.remove('show');
+            } catch (error) {
+                console.error('Submit error:', error);
+                showModal('error', '전송 실패',
+                    '신청서 전송 중 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.\n\n문의: 010-6674-6790');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+        
+        // 모달 표시
+        function showModal(type, title, message) {
+            const modal = document.getElementById('resultModal');
+            const icon = document.getElementById('modalIcon');
+            const titleEl = document.getElementById('modalTitle');
+            const messageEl = document.getElementById('modalMessage');
+            const btn = document.getElementById('modalBtn');
+            
+            if (type === 'success') {
+                icon.textContent = '✅';
+                btn.className = 'modal-btn success';
+            } else {
+                icon.textContent = '❌';
+                btn.className = 'modal-btn error';
+            }
+            
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            messageEl.style.whiteSpace = 'pre-line';
+            modal.classList.add('show');
+        }
+        
+        // 모달 닫기
+        function closeModal() {
+            document.getElementById('resultModal').classList.remove('show');
+        }
+        
+        // 이미지 저장
+        async function saveImage() {
+            const container = document.getElementById('form-container');
+            try {
+                const canvas = await html2canvas(container, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+                const link = document.createElement('a');
+                const studentName = document.getElementById('student_name').value || '신청서';
+                link.download = `수시컨설팅신청서_${studentName}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (error) {
+                alert('이미지 저장 중 오류가 발생했습니다.');
+            }
+        }
+        
+        // PDF 저장
+        async function savePDF() {
+            const container = document.getElementById('form-container');
+            const { jsPDF } = window.jspdf;
+            try {
+                const canvas = await html2canvas(container, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const imgX = (pdfWidth - imgWidth * ratio) / 2;
+                const imgY = 5;
+                pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+                const studentName = document.getElementById('student_name').value || '신청서';
+                pdf.save(`수시컨설팅신청서_${studentName}.pdf`);
+            } catch (error) {
+                alert('PDF 저장 중 오류가 발생했습니다.');
+            }
+        }
+        
+        // 페이지 로드시 오늘 날짜 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('write_date').value = today;
+        });
+        
+        // 모달 외부 클릭시 닫기
+        document.getElementById('resultModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김휘창입시컨설팅 · DATA × AI × 30년 경험</title>
+<meta property="og:title" content="김휘창입시컨설팅 — DATA × AI × 30년 경험">
+<meta property="og:description" content="331,917건 입시 데이터 기반 정밀 컨설팅. 감이 아닌 데이터, 경험이 아닌 알고리즘으로 합격을 설계합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1F4D; --navy2:#0D2B6E; --navy-deep:#050F2B; --gold:#C9A84C; --gold-lt:#E5D29A;
+    --ink:#222; --muted:#6B6B6B; --line:rgba(201,168,76,.28); --cream:#F7F4EC; --paper:#FBFAF6;
+    --display:'Black Han Sans', sans-serif; --serif:'Gowun Batang', serif; --sans:'Gowun Dodum', sans-serif;
+    --c1:#2E5BBA; --c2:#2E7D52; --c3:#7E3F9E; --c4:#D8662C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .serif{font-family:var(--serif);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+  section{padding:70px 0;}
+
+  /* ===== HERO ===== */
+  .hero{position:relative;background:
+      radial-gradient(circle at 18% 20%,rgba(201,168,76,.16),transparent 42%),
+      radial-gradient(circle at 84% 76%,rgba(201,168,76,.12),transparent 48%),
+      linear-gradient(160deg,var(--navy-deep),var(--navy) 55%,var(--navy2));
+    color:#fff;text-align:center;padding:70px 22px 60px;overflow:hidden;}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .hero-inner{position:relative;max-width:920px;margin:0 auto;}
+
+  /* ===== 나침반 ===== */
+  .compass{width:118px;height:118px;margin:0 auto 22px;display:block;
+    filter:drop-shadow(0 6px 22px rgba(201,168,76,.35));
+    animation:compassFloat 6s ease-in-out infinite;}
+  @keyframes compassFloat{
+    0%,100%{transform:translateY(0) rotate(-2deg);}
+    50%{transform:translateY(-7px) rotate(2deg);}
+  }
+  .compass .ring-rotate{transform-origin:60px 60px;animation:ringSpin 28s linear infinite;}
+  @keyframes ringSpin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+  .compass .needle{transform-origin:60px 60px;animation:needleSeek 7s ease-in-out infinite;}
+  @keyframes needleSeek{
+    0%{transform:rotate(0deg);}
+    22%{transform:rotate(310deg);}
+    40%{transform:rotate(160deg);}
+    58%{transform:rotate(250deg);}
+    74%{transform:rotate(350deg);}
+    88%,100%{transform:rotate(360deg);}  /* 정북에서 정착 */
+  }
+  .compass .glow{animation:glowPulse 4s ease-in-out infinite;transform-origin:60px 60px;}
+  @keyframes glowPulse{0%,100%{opacity:.25;}50%{opacity:.6;}}
+  .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,9vw,84px);
+    letter-spacing:.01em;line-height:1;
+    background:linear-gradient(180deg,#fff 40%,#D9E2F5);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 4px 30px rgba(0,0,0,.3);}
+  .hero .dax{font-family:var(--display);font-size:clamp(24px,5.4vw,46px);color:var(--gold);margin-top:10px;letter-spacing:.02em;
+    text-shadow:0 2px 14px rgba(201,168,76,.35);}
+  .hero .dax .x{color:var(--gold-lt);font-size:.8em;margin:0 .12em;}
+  .ribbon{display:inline-block;margin-top:24px;background:linear-gradient(180deg,var(--gold-lt),var(--gold));
+    color:var(--navy-deep);font-weight:700;font-size:clamp(15px,2.6vw,20px);font-family:var(--sans);
+    padding:11px 34px;border-radius:6px;box-shadow:0 8px 24px rgba(201,168,76,.3);position:relative;}
+  .hero .lead{margin-top:30px;font-family:var(--serif);font-size:clamp(17px,3vw,23px);line-height:1.6;color:#EAEFFA;}
+  .hero .lead b{color:var(--gold);font-weight:700;}
+
+  /* 자격 4종 */
+  .creds{display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin-top:40px;
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04);backdrop-filter:blur(4px);}
+  .cred{flex:1 1 200px;padding:18px 16px;display:flex;align-items:center;gap:12px;justify-content:center;
+    border-right:1px solid var(--line);min-width:200px;}
+  .cred:last-child{border-right:none;}
+  .cred .ic{font-size:26px;}
+  .cred .t{text-align:left;font-size:13.5px;color:#D8E0F2;line-height:1.4;}
+  .cred .t b{display:block;color:#fff;font-size:15px;font-weight:700;}
+
+  /* ===== 공통 헤더 ===== */
+  .eyebrow{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:12px;}
+  .eyebrow span{font-size:12px;letter-spacing:.34em;color:var(--gold);font-weight:700;}
+  .eyebrow::before,.eyebrow::after{content:"";height:1px;width:40px;background:var(--gold);opacity:.5;}
+  .sec-title{font-family:var(--serif);font-weight:700;font-size:clamp(25px,4.4vw,34px);color:var(--navy2);text-align:center;line-height:1.3;}
+  .sec-sub{text-align:center;color:var(--muted);font-size:15px;margin-top:8px;margin-bottom:42px;}
+
+  /* ===== WHY (지표 4종) ===== */
+  .why{background:linear-gradient(180deg,#fff,var(--cream));}
+  .why-quote{text-align:center;font-family:var(--serif);font-size:clamp(20px,3.6vw,28px);color:var(--navy2);line-height:1.6;margin-bottom:40px;}
+  .why-quote .hl{color:var(--gold);font-weight:700;}
+  .why-quote .mk{color:var(--gold);font-size:1.4em;}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .stat{background:#fff;border:1px solid #ECE7D8;border-top:3px solid var(--gold);border-radius:14px;padding:26px 14px;text-align:center;
+    transition:transform .25s,box-shadow .25s;}
+  .stat:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(13,43,110,.12);}
+  .stat .ic{font-size:30px;margin-bottom:8px;}
+  .stat .big{font-family:var(--display);font-size:clamp(26px,4vw,34px);color:var(--navy2);line-height:1;}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45;}
+
+  /* ===== 프로그램 4종 ===== */
+  .progs{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .prog{background:#fff;border:1px solid #E9E5DB;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .25s,box-shadow .25s;}
+  .prog:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(13,43,110,.14);}
+  .prog-head{padding:18px 22px;color:#fff;display:flex;align-items:center;justify-content:space-between;}
+  .prog.p1 .prog-head{background:linear-gradient(120deg,var(--c1),#1E417F);}
+  .prog.p2 .prog-head{background:linear-gradient(120deg,var(--c2),#1C5638);}
+  .prog.p3 .prog-head{background:linear-gradient(120deg,var(--c3),#5A2B73);}
+  .prog.p4 .prog-head{background:linear-gradient(120deg,var(--c4),#A8481B);}
+  .prog-head .no{font-family:var(--display);font-size:15px;opacity:.85;}
+  .prog-head .nm{font-family:var(--serif);font-weight:700;font-size:21px;}
+  .prog-head .score{font-size:12px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 11px;white-space:nowrap;}
+  .prog-body{padding:20px 22px 0;flex:1;}
+  .prog-body ul{list-style:none;}
+  .prog-body li{position:relative;padding-left:24px;margin-bottom:9px;font-size:14px;color:#3a3a3a;}
+  .prog-body li::before{content:"✓";position:absolute;left:0;font-weight:700;}
+  .prog.p1 li::before{color:var(--c1);} .prog.p2 li::before{color:var(--c2);}
+  .prog.p3 li::before{color:var(--c3);} .prog.p4 li::before{color:var(--c4);}
+  .prog-price{margin:18px 22px 0;border-radius:10px;text-align:center;padding:12px;color:#fff;font-family:var(--display);font-size:24px;letter-spacing:.02em;}
+  .prog.p1 .prog-price{background:var(--c1);} .prog.p2 .prog-price{background:var(--c2);}
+  .prog.p3 .prog-price{background:var(--c3);} .prog.p4 .prog-price{background:var(--c4);}
+  .prog-meta{padding:12px 22px 20px;text-align:center;font-size:12.5px;color:var(--muted);}
+  .prog-note{text-align:center;color:var(--muted);font-size:13px;margin-top:26px;}
+
+  /* ===== 차별화 / AI 시스템 / 성과 ===== */
+  .triple{display:grid;grid-template-columns:1.05fr 1.25fr .9fr;gap:20px;}
+  .panel{background:#fff;border:1px solid #E9E5DB;border-radius:16px;padding:24px 22px;}
+  .panel h3{font-family:var(--serif);font-size:19px;color:var(--navy2);margin-bottom:16px;display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--gold);padding-bottom:10px;}
+  .panel ul{list-style:none;}
+  .panel li{position:relative;padding-left:22px;margin-bottom:8px;font-size:13.5px;}
+  .panel li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .aigrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .aibox{background:var(--cream);border-radius:10px;padding:12px 10px;text-align:center;font-size:12.5px;color:#444;line-height:1.4;}
+  .aibox .ic{font-size:20px;display:block;margin-bottom:5px;}
+  .grade-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed #E2DDD0;font-size:14px;}
+  .grade-row:last-child{border-bottom:none;}
+  .grade-row .g{font-family:var(--serif);font-weight:700;color:var(--gold);}
+  .grade-foot{margin-top:14px;text-align:center;font-family:var(--display);font-size:16px;color:var(--navy2);}
+  .grade-foot .stars{display:block;color:var(--gold);margin-top:4px;letter-spacing:2px;}
+
+  /* ===== 슬로건 ===== */
+  .slogans{background:linear-gradient(160deg,var(--navy-deep),var(--navy));color:#fff;text-align:center;}
+  .slogan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .slogan{font-family:var(--serif);font-size:clamp(16px,2.4vw,20px);line-height:1.6;}
+  .slogan b{color:var(--gold);display:block;font-size:1.15em;margin-top:4px;}
+
+  /* ===== CTA ===== */
+  .cta{background:var(--cream);text-align:center;}
+  .cta h2{font-family:var(--serif);font-size:clamp(24px,4.2vw,32px);color:var(--navy2);font-weight:700;margin-bottom:14px;line-height:1.4;}
+  .cta h2 .em{color:var(--gold);}
+  .cta p{color:var(--muted);margin-bottom:30px;}
+  .btn{display:inline-block;background:linear-gradient(180deg,var(--navy2),var(--navy));color:#fff;font-family:var(--sans);font-weight:700;
+    font-size:18px;padding:17px 50px;border-radius:44px;text-decoration:none;box-shadow:0 12px 30px rgba(13,43,110,.3);
+    transition:transform .2s,box-shadow .2s;border:1.5px solid var(--gold);}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(13,43,110,.42);}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy-deep);color:#9FB0D4;text-align:center;padding:34px 22px;}
+  footer .contact{display:flex;flex-wrap:wrap;gap:10px 36px;justify-content:center;margin-bottom:14px;font-size:16px;}
+  footer .contact a{color:var(--gold-lt);text-decoration:none;font-weight:700;}
+  footer .fine{font-size:12.5px;color:#6F7EA3;line-height:1.7;}
+  footer .logo{font-family:var(--serif);color:var(--gold);font-size:17px;font-weight:700;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.show{opacity:1;transform:none;}
+
+  @media(max-width:860px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .progs{grid-template-columns:1fr;}
+    .triple{grid-template-columns:1fr;}
+    .slogan-grid{grid-template-columns:1fr;gap:18px;}
+    .cred{flex:1 1 50%;border-bottom:1px solid var(--line);}
+    section{padding:54px 0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <svg class="compass" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="나침반">
+      <!-- 외곽 글로우 -->
+      <circle class="glow" cx="60" cy="60" r="56" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+      <!-- 본체 -->
+      <circle cx="60" cy="60" r="52" fill="#0A1F4D" stroke="#C9A84C" stroke-width="2.5"/>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+      <!-- 회전하는 눈금 링 -->
+      <g class="ring-rotate" stroke="#E5D29A" stroke-width="1.4" opacity="0.85">
+        <line x1="60" y1="10" x2="60" y2="18"/>
+        <line x1="60" y1="102" x2="60" y2="110"/>
+        <line x1="10" y1="60" x2="18" y2="60"/>
+        <line x1="102" y1="60" x2="110" y2="60"/>
+        <g stroke-width="0.9" opacity="0.6">
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(45 60 60)"/>
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(90 60 60)"/>
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(135 60 60)"/>
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(180 60 60)"/>
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(225 60 60)"/>
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(270 60 60)"/>
+          <line x1="60" y1="12" x2="60" y2="16" transform="rotate(315 60 60)"/>
+        </g>
+      </g>
+      <!-- 방위 글자 -->
+      <text x="60" y="32" text-anchor="middle" fill="#C9A84C" font-size="11" font-weight="bold" font-family="serif">N</text>
+      <text x="60" y="96" text-anchor="middle" fill="#9FB0D4" font-size="9" font-family="serif">S</text>
+      <text x="92" y="64" text-anchor="middle" fill="#9FB0D4" font-size="9" font-family="serif">E</text>
+      <text x="28" y="64" text-anchor="middle" fill="#9FB0D4" font-size="9" font-family="serif">W</text>
+      <!-- 바늘 -->
+      <g class="needle">
+        <polygon points="60,22 65,60 60,56 55,60" fill="#D8662C"/>
+        <polygon points="60,98 65,60 60,64 55,60" fill="#E5D29A"/>
+      </g>
+      <!-- 중심축 -->
+      <circle cx="60" cy="60" r="4.5" fill="#C9A84C" stroke="#0A1F4D" stroke-width="1.2"/>
+      <circle cx="60" cy="60" r="1.6" fill="#0A1F4D"/>
+    </svg>
+    <h1>김휘창입시컨설팅</h1>
+    <div class="dax">DATA <span class="x">×</span> AI <span class="x">×</span> 30년 경험</div>
+    <div class="ribbon">331,917건 입시 데이터 기반 정밀 컨설팅</div>
+    <p class="lead">감이 아닌 <b>데이터</b>, 경험이 아닌 <b>알고리즘</b>으로<br>합격을 설계합니다.</p>
+    <div class="creds">
+      <div class="cred"><span class="ic">🎓</span><span class="t"><b>입시상담 30년</b>현장 전문성</span></div>
+      <div class="cred"><span class="ic">🤖</span><span class="t"><b>AI 입시분석 전문가</b>자체 알고리즘 개발</span></div>
+      <div class="cred"><span class="ic">☕</span><span class="t"><b>수만휘카페 멘토</b>구독자 33만 명</span></div>
+      <div class="cred"><span class="ic">📰</span><span class="t"><b>고양신문 교육자문위원</b>공신력 있는 활동</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- WHY -->
+<section class="why">
+  <div class="wrap">
+    <div class="eyebrow"><span>WHY KIM HWICHANG</span></div>
+    <h2 class="sec-title">왜 김휘창입시컨설팅인가?</h2>
+    <div class="sec-sub">숫자가 증명하는 신뢰</div>
+    <div class="stats">
+      <div class="stat reveal"><div class="ic">🗄️</div><div class="big">331,917건</div><div class="lbl">실제 합격·불합격<br>입시 데이터</div></div>
+      <div class="stat reveal"><div class="ic">🧠</div><div class="big">25개</div><div class="lbl">자체 개발<br>AI 프로그램</div></div>
+      <div class="stat reveal"><div class="ic">🏅</div><div class="big">A등급</div><div class="lbl">프로그램 품질 검증<br>(업계 평가)</div></div>
+      <div class="stat reveal"><div class="ic">👤</div><div class="big">30년</div><div class="lbl">현장 입시컨설팅<br>전문성과 신뢰</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4대 프로그램 -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><span>PROGRAMS</span></div>
+    <h2 class="sec-title">4대 핵심 프로그램</h2>
+    <div class="sec-sub">학생의 상황에 맞춘 정밀 맞춤 컨설팅</div>
+    <div class="progs">
+      <div class="prog p1 reveal">
+        <div class="prog-head"><div><span class="no">01</span> <span class="nm">수시컨설팅</span></div><span class="score">평가 92점 · A등급</span></div>
+        <div class="prog-body"><ul>
+          <li>331,917건 데이터 분석</li><li>6단계 합격확률 분석</li><li>수능최저 충족 시뮬레이션</li>
+          <li>대학별 환산내신 계산</li><li>6칸 포트폴리오 최적화</li>
+        </ul></div>
+        <div class="prog-price">50만원</div>
+        <div class="prog-meta">대상 고3 &nbsp;|&nbsp; 시기 6~9월</div>
+      </div>
+      <div class="prog p2 reveal">
+        <div class="prog-head"><div><span class="no">02</span> <span class="nm">학생부컨설팅</span></div><span class="score">평가 91점 · A등급</span></div>
+        <div class="prog-body"><ul>
+          <li>12개 핵심지표 AI 분석</li><li>세특 설계 전략</li><li>강점·약점 진단</li>
+          <li>성장 로드맵 구축</li><li>대학별 매칭도 분석</li>
+        </ul></div>
+        <div class="prog-price">40만원</div>
+        <div class="prog-meta">대상 고1~고3 &nbsp;|&nbsp; 시기 연중</div>
+      </div>
+      <div class="prog p3 reveal">
+        <div class="prog-head"><div><span class="no">03</span> <span class="nm">면접컨설팅</span></div><span class="score">평가 87점 · A-등급</span></div>
+        <div class="prog-body"><ul>
+          <li>AI 예상질문 생성</li><li>대학별 기출 분석</li><li>맞춤 답변 스크립트 작성</li>
+          <li>1:1 실전 모의면접 훈련</li><li>비언어 표현 피드백 제공</li>
+        </ul></div>
+        <div class="prog-price">60만원</div>
+        <div class="prog-meta">대상 고3 &nbsp;|&nbsp; 시기 면접 전</div>
+      </div>
+      <div class="prog p4 reveal">
+        <div class="prog-head"><div><span class="no">04</span> <span class="nm">정시컨설팅</span></div><span class="score">평가 88점 · A-등급</span></div>
+        <div class="prog-body"><ul>
+          <li>219개 대학 환산수식 적용</li><li>가·나·다군 최적 배치</li><li>추합확률 시뮬레이션</li>
+          <li>교차지원 분석</li><li>3개 전략안 비교 제공</li>
+        </ul></div>
+        <div class="prog-price">40만원</div>
+        <div class="prog-meta">대상 고3 &nbsp;|&nbsp; 시기 수능 후 12월</div>
+      </div>
+    </div>
+    <p class="prog-note">※ 모든 프로그램 대면/비대면 선택 가능 &nbsp;|&nbsp; VAT 포함 &nbsp;|&nbsp; 상담시간 60분+ &nbsp;|&nbsp; 원서/지원 후 최종 점검 1회 포함</p>
+  </div>
+</section>
+
+<!-- 차별화 / AI / 성과 -->
+<section class="why">
+  <div class="wrap">
+    <div class="eyebrow"><span>SYSTEM &amp; PERFORMANCE</span></div>
+    <h2 class="sec-title">차별화된 시스템과 검증된 성과</h2>
+    <div class="sec-sub" style="margin-bottom:38px"></div>
+    <div class="triple">
+      <div class="panel reveal">
+        <h3>💎 차별화 포인트</h3>
+        <ul>
+          <li>수시·정시 통합 분석</li><li>AI 기반 입시 시뮬레이션</li><li>대학별 환산점수 자동계산</li>
+          <li>학생부 AI 정량평가</li><li>면접 질문 자동생성</li><li>합격률 예측 시스템</li><li>전국 비대면 상담 가능</li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <h3>🧩 AI 분석 시스템 &amp; 운영</h3>
+        <div class="aigrid">
+          <div class="aibox"><span class="ic">📊</span>수시엔트로피</div>
+          <div class="aibox"><span class="ic">🎯</span>정시엔트로피</div>
+          <div class="aibox"><span class="ic">🤖</span>학생부 AI 평가기</div>
+          <div class="aibox"><span class="ic">🎤</span>AI 면접 시뮬레이터</div>
+          <div class="aibox"><span class="ic">🧑‍💼</span>AI 성향분석 시스템</div>
+          <div class="aibox"><span class="ic">📈</span>합격률 예측 프로그램</div>
+          <div class="aibox"><span class="ic">📋</span>전형별 맞춤 분석도구</div>
+          <div class="aibox"><span class="ic">🗄️</span>대학별 데이터베이스</div>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h3>🏆 컨설팅 성과</h3>
+        <div class="grade-row"><span>수시 컨설팅</span><span class="g">A등급</span></div>
+        <div class="grade-row"><span>학생부 컨설팅</span><span class="g">A등급</span></div>
+        <div class="grade-row"><span>면접 컨설팅</span><span class="g">A-등급</span></div>
+        <div class="grade-row"><span>정시 컨설팅</span><span class="g">A-등급</span></div>
+        <div class="grade-foot">DATA × AI × 30년 경험<span class="stars">★★★★★</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 슬로건 -->
+<section class="slogans">
+  <div class="wrap">
+    <div class="slogan-grid">
+      <div class="slogan reveal">대입은 감이 아니라<b>데이터입니다.</b></div>
+      <div class="slogan reveal">합격은 우연이 아니라<b>설계입니다.</b></div>
+      <div class="slogan reveal">331,917건 데이터가<b>증명합니다.</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2 class="serif">지금, <span class="em">우리 아이의 합격 전략</span>을 설계하세요.</h2>
+    <p>아래 버튼을 눌러 컨설팅을 신청해 주세요. 접수 후 빠르게 연락드리겠습니다.</p>
+    <a href="수시컨설팅신청서_GAS연동.html" class="btn">📝 컨설팅 신청하기</a>
+  </div>
+</section>
+
+<footer>
+  <div class="contact">
+    <span>📞 상담문의 <a href="tel:0319781117">031-978-1117</a></span>
+    <span>🌐 <a href="https://ipsiai.com" target="_blank">https://ipsiai.com</a></span>
+  </div>
+  <div class="fine">
+    <span class="logo">김휘창입시컨설팅</span><br>
+    DATA × AI × 30년 경험 · 331,917건 합불 데이터 기반 AI 입시 분석<br>
+    © 2026 김휘창입시컨설팅 · 맥에듀테크. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('show'),(i%4)*80); io.unobserve(e.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
